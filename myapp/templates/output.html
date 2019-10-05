@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{% static 'timetable.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1 bg-color=red>This is the list of all possible timetable combinations possible for given input courses.</h1>
+        <div class='row'>
+          <div class="col">
+          {%for dic_var in final_dict_mor%}
+          <table class="table">
+            <thead>
+
+              <tr>
+
+                <th scope="col">8:00-8:50</th>
+                <th scope="col">8:55-9:45</th>
+                <th scope="col">9:50-10:40</th>
+                <th scope="col">10:45-11:35</th>
+                <th scope="col">11:40-12:30</th>
+                <th scope="col">12:35-1:20</th>
+
+              </tr>
+            </thead>
+            <tbody>{%for j in dic_var%}
+                          <tr>
+
+                              {%for k in j%}
+                            <td id='cell-{{k}}'></td>
+                            {%endfor%}
+              {%endfor%}
+            </tbody>
+          </table>
+          {%endfor%}
+          </div>
+          <div class="col">
+            {%for dic_var in final_dict_eve%}
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col">2:00-2:50</th>
+                <th scope="col">2:55-3:45</th>
+                <th scope="col">3:50-4:40</th>
+                <th scope="col">4:45-5:35</th>
+                <th scope="col">5:40-6:30</th>
+                <th scope="col">6:35-7:20</th>
+              </tr>
+            </thead>
+            <tbody>{%for j in dic_var%}
+
+                          <tr>
+
+                              {%for k in j%}
+                            <td id='cell-{{k}}'></td>
+                            {%endfor%}
+              {%endfor%}
+            </tbody>
+          </table>
+            {%endfor%}
+          </div>
+          </div>
+        <a href="/" class="btn btn-primary">Go to Home</a>
+  </body>
+</html>

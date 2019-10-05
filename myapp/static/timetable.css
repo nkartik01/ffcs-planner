@@ -1,0 +1,12 @@
+#cell-1{
+  background-color: green;
+}
+#cell-0{
+  background-color: yellow;
+}
+h1{
+  color:green
+}
+td,th{
+  border: 1px solid black
+}
