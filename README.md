@@ -17,6 +17,7 @@ Installation:
      django
      django-crispy-forms
      more-itertools
+     pandas
      
   Go to command prompt and cd to the project directory.
   type:   py manage.py makemigrations
