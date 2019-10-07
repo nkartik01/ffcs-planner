@@ -11,38 +11,17 @@
     <h1 bg-color=red>This is the list of all possible timetable combinations possible for given input courses.</h1>
         <div class='row'>
           <div class="col">
-          {%for dic_var in final_dict_mor%}
           <table class="table">
             <thead>
-
               <tr>
-
+                <th>Day/Time</th>
                 <th scope="col">8:00-8:50</th>
                 <th scope="col">8:55-9:45</th>
                 <th scope="col">9:50-10:40</th>
                 <th scope="col">10:45-11:35</th>
                 <th scope="col">11:40-12:30</th>
                 <th scope="col">12:35-1:20</th>
-
-              </tr>
-            </thead>
-            <tbody>{%for j in dic_var%}
-                          <tr>
-
-                              {%for k in j%}
-                            <td id='cell-{{k}}'></td>
-                            {%endfor%}
-              {%endfor%}
-            </tbody>
-          </table>
-          {%endfor%}
-          </div>
-          <div class="col">
-            {%for dic_var in final_dict_eve%}
-          <table class="table">
-            <thead>
-              <tr>
-
+                <th scope="col">#</th>
                 <th scope="col">2:00-2:50</th>
                 <th scope="col">2:55-3:45</th>
                 <th scope="col">3:50-4:40</th>
@@ -51,19 +30,96 @@
                 <th scope="col">6:35-7:20</th>
               </tr>
             </thead>
-            <tbody>{%for j in dic_var%}
+            <tr>
+              <th>Monday</th>
+              <td id='cell-{{ k1 }}'>A1/L1</td>
+              <td id='cell-{{k2}}'>F1/L2</td>
+              <td id='cell-{{k3}}'>D1/L3</td>
+              <td id='cell-{{k4}}'>TB1/L4</td>
+              <td id='cell-{{k5}}'>TG1/L5</td>
+              <td id='cell-{{k6}}'>L6</td>
+              <td></td>
+              <td id='cell-{{k31}}'>A2/L31</td>
+              <td id='cell-{{k32}}'>F2/L32</td>
+              <td id='cell-{{k33}}'>D2/L33</td>
+              <td id='cell-{{k34}}'>TB2/L34</td>
+              <td id='cell-{{k35}}'>TG2/L35</td>
+              <td id='cell-{{k36}}'>L36</td>
+            </tr>
+            <tr>
 
-                          <tr>
+              <th>Tuesday</th>
+              <td id='cell-{{k7}}'>B1/L7</td>
+              <td id='cell-{{k8}}'>G1/L8</td>
+              <td id='cell-{{k9}}'>E1/L9</td>
+              <td id='cell-{{k10}}'>TC1/L10</td>
+              <td id='cell-{{k11}}'>TAA1/L11</td>
+              <td id='cell-{{k12}}'>L12</td>
+              <td></td>
+              <td id='cell-{{k37}}'>B2/L37</td>
+              <td id='cell-{{k38}}'>G2/L38</td>
+              <td id='cell-{{k39}}'>E2/L39</td>
+              <td id='cell-{{k40}}'>TC2/L40</td>
+              <td id='cell-{{k41}}'>TAA2/L41</td>
+              <td id='cell-{{k42}}'>L42</td>
+            </tr>
+            <tr>
 
-                              {%for k in j%}
-                            <td id='cell-{{k}}'></td>
-                            {%endfor%}
-              {%endfor%}
+              <th>Wednesday</th>
+              <td id='cell-{{k13}}'>C1/L13</td>
+              <td id='cell-{{k14}}'>A1/L14</td>
+              <td id='cell-{{k15}}'>F1/L15</td>
+              <td id='cell-{{k16}}'>TD1/L16</td>
+              <td>Extra</td>
+              <td>Mural Hour</td>
+              <td></td>
+              <td id='cell-{{k43}}'>C2/L43</td>
+              <td id='cell-{{k44}}'>A2/L44</td>
+              <td id='cell-{{k45}}'>F2/L45</td>
+              <td id='cell-{{k46}}'>TD2/L46</td>
+              <td id='cell-{{k47}}'>TBB2/L47</td>
+              <td id='cell-{{k48}}'>L48</td>
+            </tr>
+            <tr>
+
+              <th>Thursday</th>
+              <td id='cell-{{k19}}'>D1/L19</td>
+              <td id='cell-{{k20}}'>B1/L20</td>
+              <td id='cell-{{k21}}'>G1/L21</td>
+              <td id='cell-{{k22}}'>TE1/L22</td>
+              <td id='cell-{{k23}}'>TCC1/L23</td>
+              <td id='cell-{{k24}}'>L24</td>
+              <td></td>
+              <td id='cell-{{k49}}'>D2/L49</td>
+              <td id='cell-{{k50}}'>B2/L50</td>
+              <td id='cell-{{k51}}'>G2/L51</td>
+              <td id='cell-{{k52}}'>TE2/L52</td>
+              <td id='cell-{{k53}}'>TCC2/L53</td>
+              <td id='cell-{{k54}}'>L54</td>
+            </tr>
+            <tr>
+              <th>Friday</th>
+              <td id='cell-{{k25}}'>E1/L25</td>
+              <td id='cell-{{k26}}'>C1/L26</td>
+              <td id='cell-{{k27}}'>TA1/L27</td>
+              <td id='cell-{{k28}}'>TF1/L28</td>
+              <td id='cell-{{k29}}'>TDD1/L29</td>
+              <td id='cell-{{k30}}'>L30</td>
+              <td></td>
+              <td id='cell-{{k55}}'>E2/L55</td>
+              <td id='cell-{{k56}}'>C2/L56</td>
+              <td id='cell-{{k57}}'>TA2/L57</td>
+              <td id='cell-{{k58}}'>TF2/L58</td>
+              <td id='cell-{{k59}}'>TDD2/L59</td>
+              <td id='cell-{{k60}}'>L60</td>
+            </tr>
+
             </tbody>
           </table>
-            {%endfor%}
-          </div>
-          </div>
-        <a href="/" class="btn btn-primary">Go to Home</a>
+        </div>
+      </div>
+    <a href="/output_page_next/" class='btn btn-primary'>Prev</a>
+    <a href="/" class="btn btn-primary">Go to Home</a>
+    <a href="/output_page_prev/" class='btn btn-primary'>Next</a>
   </body>
 </html>

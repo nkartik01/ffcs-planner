@@ -14,6 +14,8 @@ import csv,io
 
 from .readslots import read
 #stripe.api_key = settings.STRIPE_SECRET_KEY
+global ins
+ins=-1
 global form
 form=0
 global n
@@ -25,6 +27,8 @@ listx=[]
 global offer_id
 global course_list
 global course_list2
+global final_list
+final_list=[]
 # Create your views here.
 
 def rslots(request):
@@ -156,6 +160,7 @@ def course_up(request):
     return redirect('/')
 def output(request):
     global listx
+    global final_list
     global offer_id
     offer_id = []
     for i in listx:
@@ -249,22 +254,26 @@ def output(request):
          #    img = Image.open('p'+str(c)+'.eps')
          #    img.save('p'+str(c)+'.png','png')
          #    can_list.append(canvas)
-            final_list.append(x)
+            final_list.append(w)
             c+=1
     if final_list==[]:
         return render(request,'failed2.html')
+    global final_dict
+    final_dict=[]
     final_dict_mor=[]
     final_dict_eve=[]
     for i in final_list:
         x=[]
+        final_dict.append([])
         for j in range(1,31,1):
             if(j%6)==1:
                 x.append([])
             if j in i:
                 x[len(x)-1].append(1)
+                final_dict[len(final_dict)-1].append(1)
             else:
                 x[len(x)-1].append(0)
-
+                final_dict[len(final_dict)-1].append(0)
         final_dict_mor.append(x)
         x=[]
         for j in range(31,61,1):
@@ -272,17 +281,149 @@ def output(request):
                 x.append([])
             if j in i:
                 x[len(x)-1].append(1)
+                final_dict[len(final_dict)-1].append(1)
             else:
                 x[len(x)-1].append(0)
-
+                final_dict[len(final_dict)-1].append(0)
         final_dict_eve.append(x)
-
-    i=0
-
+    return redirect('/output_page_next/')
     #print(final_dict,final_dict[0]['0'])
+
+def output_page_next(request):
+    global ins
+    global final_dict
+    print(final_dict)
+    ins+=1
+    if ins==len(final_dict):
+        ins=0
     return render(request,'output.html',{
-        'final':final_list,
-        'final_dict_mor':final_dict_mor,
-        'final_dict_eve':final_dict_eve,
-        #'canvas':can_list
+        'k1':final_dict[ins][0],
+        'k2':final_dict[ins][1],
+        'k3':final_dict[ins][2],
+        'k4':final_dict[ins][3],
+        'k5':final_dict[ins][4],
+        'k6':final_dict[ins][5],
+        'k7':final_dict[ins][6],
+        'k8':final_dict[ins][7],
+        'k9':final_dict[ins][8],
+        'k10':final_dict[ins][9],
+        'k11':final_dict[ins][10],
+        'k12':final_dict[ins][11],
+        'k13':final_dict[ins][12],
+        'k14':final_dict[ins][13],
+        'k15':final_dict[ins][14],
+        'k16':final_dict[ins][15],
+        'k17':final_dict[ins][16],
+        'k18':final_dict[ins][17],
+        'k19':final_dict[ins][18],
+        'k20':final_dict[ins][19],
+        'k21':final_dict[ins][20],
+        'k22':final_dict[ins][21],
+        'k23':final_dict[ins][22],
+        'k24':final_dict[ins][23],
+        'k25':final_dict[ins][24],
+        'k26':final_dict[ins][25],
+        'k27':final_dict[ins][26],
+        'k28':final_dict[ins][27],
+        'k29':final_dict[ins][28],
+        'k30':final_dict[ins][29],
+        'k31':final_dict[ins][30],
+        'k32':final_dict[ins][31],
+        'k33':final_dict[ins][32],
+        'k34':final_dict[ins][33],
+        'k35':final_dict[ins][34],
+        'k36':final_dict[ins][35],
+        'k37':final_dict[ins][36],
+        'k38':final_dict[ins][37],
+        'k39':final_dict[ins][38],
+        'k40':final_dict[ins][39],
+        'k41':final_dict[ins][40],
+        'k42':final_dict[ins][41],
+        'k43':final_dict[ins][42],
+        'k44':final_dict[ins][43],
+        'k45':final_dict[ins][44],
+        'k46':final_dict[ins][45],
+        'k47':final_dict[ins][46],
+        'k48':final_dict[ins][47],
+        'k49':final_dict[ins][48],
+        'k50':final_dict[ins][49],
+        'k51':final_dict[ins][50],
+        'k52':final_dict[ins][51],
+        'k53':final_dict[ins][52],
+        'k54':final_dict[ins][53],
+        'k55':final_dict[ins][54],
+        'k56':final_dict[ins][55],
+        'k57':final_dict[ins][56],
+        'k58':final_dict[ins][57],
+        'k59':final_dict[ins][58],
+        'k60':final_dict[ins][59],
+    })
+def output_page_prev(request):
+    global ins
+    global final_dict
+    print(final_dict)
+    ins-=1
+    if ins==-1:
+        ins=len(final_dict)-1
+    return render(request,'output.html',{
+        'k1':final_dict[ins][0],
+        'k2':final_dict[ins][1],
+        'k3':final_dict[ins][2],
+        'k4':final_dict[ins][3],
+        'k5':final_dict[ins][4],
+        'k6':final_dict[ins][5],
+        'k7':final_dict[ins][6],
+        'k8':final_dict[ins][7],
+        'k9':final_dict[ins][8],
+        'k10':final_dict[ins][9],
+        'k11':final_dict[ins][10],
+        'k12':final_dict[ins][11],
+        'k13':final_dict[ins][12],
+        'k14':final_dict[ins][13],
+        'k15':final_dict[ins][14],
+        'k16':final_dict[ins][15],
+        'k17':final_dict[ins][16],
+        'k18':final_dict[ins][17],
+        'k19':final_dict[ins][18],
+        'k20':final_dict[ins][19],
+        'k21':final_dict[ins][20],
+        'k22':final_dict[ins][21],
+        'k23':final_dict[ins][22],
+        'k24':final_dict[ins][23],
+        'k25':final_dict[ins][24],
+        'k26':final_dict[ins][25],
+        'k27':final_dict[ins][26],
+        'k28':final_dict[ins][27],
+        'k29':final_dict[ins][28],
+        'k30':final_dict[ins][29],
+        'k31':final_dict[ins][30],
+        'k32':final_dict[ins][31],
+        'k33':final_dict[ins][32],
+        'k34':final_dict[ins][33],
+        'k35':final_dict[ins][34],
+        'k36':final_dict[ins][35],
+        'k37':final_dict[ins][36],
+        'k38':final_dict[ins][37],
+        'k39':final_dict[ins][38],
+        'k40':final_dict[ins][39],
+        'k41':final_dict[ins][40],
+        'k42':final_dict[ins][41],
+        'k43':final_dict[ins][42],
+        'k44':final_dict[ins][43],
+        'k45':final_dict[ins][44],
+        'k46':final_dict[ins][45],
+        'k47':final_dict[ins][46],
+        'k48':final_dict[ins][47],
+        'k49':final_dict[ins][48],
+        'k50':final_dict[ins][49],
+        'k51':final_dict[ins][50],
+        'k52':final_dict[ins][51],
+        'k53':final_dict[ins][52],
+        'k54':final_dict[ins][53],
+        'k55':final_dict[ins][54],
+        'k56':final_dict[ins][55],
+        'k57':final_dict[ins][56],
+        'k58':final_dict[ins][57],
+        'k59':final_dict[ins][58],
+        'k60':final_dict[ins][59],
     })

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.urls import reverse
 # Create your models here.
 class course(models.Model):
-    course_code=models.CharField(primary_key=True,max_length=7)
+    course_code=models.CharField(primary_key=True,max_length=8)
     course_title=models.CharField(max_length=120)
     l_credits=models.IntegerField()
     t_credits=models.IntegerField()

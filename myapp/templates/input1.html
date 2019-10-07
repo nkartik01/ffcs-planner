@@ -13,6 +13,7 @@
       <div class="text-center">
         <h2>Enter Courses</h2>
         <h4>Repeated courses will be ignored.</h4>
+        <h4>Please Consider Lab and theory components separately.</h4>
         <form method="post" novalidate>
           {% csrf_token %}
           {{ form|crispy }}
