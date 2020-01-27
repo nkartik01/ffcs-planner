@@ -28,5 +28,10 @@ urlpatterns = [
     path('teacher_up/',views.teacher_up,name='teacher_up'),
     path('offer_up/',views.offer_up,name='offer_up'),
     path('course_up/',views.course_up,name='course_up'),
-    
+    path('output_page_next/',views.output_page_next,name='output_page_next'),
+    path('output_page_prev/',views.output_page_prev,name='output_page_prev'),
+    path('morning_only/',views.morning_only,name='morning_only'),
+    path('evening_only/',views.evening_only,name='evening_only'),
+    path('any_theory/',views.any_theory,name='any_theory'),
+
 ]
