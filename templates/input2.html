@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>input2</title>
+  </head>
+  <body>
+
+{% load crispy_forms_tags %}
+    <div class='container'>
+      <div class="text-center">
+        <h2>Enter Course Codes in CAPS ONLY</h2>
+        <h4>Repeated courses will be ignored.</h4>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {{ form|crispy }}
+          <br>
+          <div class='container'>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
