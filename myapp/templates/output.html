@@ -5,13 +5,45 @@
     <link rel="stylesheet" href="{% static 'timetable.css'%}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.js">
+
+    </script>
+    <script>
+    $(document).ready(function(){
+      var i;
+      for (i=1;i<61;i++){
+        if($("#id_"+i.toString()).hasClass("cell-1"))
+        $("#id_"+i.toString()).css("background-color","green");
+      }
+      })
+    </script>
+    <script>
+      function title_disp(){
+
+        var c=0;
+
+        {% for ix in t %}{
+          var x = {{ix}};
+          c=c+1;
+          console.log(x);
+          var class_name=$("#id_"+(c).toString()).hasClass('cell-1');
+          if(class_name){
+            $("#id_"+(c).toString()).attr({"title":x});
+          }
+        }
+        {% endfor %}
+      }
+    </script>
     <title></title>
   </head>
   <body>
+    {% load crispy_forms_tags %}
+
     <h1 bg-color=red>This is the list of all possible timetable combinations possible for given input courses.</h1>
         <div class='row'>
           <div class="col">
           <table class="table">
+            <caption text-align=right>Number {{i}} of {{n}} possible combinations</caption>
             <thead>
               <tr>
                 <th>Day/Time</th>
@@ -32,94 +64,117 @@
             </thead>
             <tr>
               <th>Monday</th>
-              <td id='cell-{{ k1 }}'>A1/L1 {{l1}}</td>
-              <td id='cell-{{k2}}'>F1/L2 {{l2}}</td>
-              <td id='cell-{{k3}}'>D1/L3 {{l3}}</td>
-              <td id='cell-{{k4}}'>TB1/L4 {{l4}}</td>
-              <td id='cell-{{k5}}'>TG1/L5 {{l5}}</td>
-              <td id='cell-{{k6}}'>L6 {{l6}}</td>
+              <td id="id_1" class='cell-{{k1}}'  title='{{t1}}'>A1/L1 {{l1}}</td>
+              <td id="id_2" class='cell-{{k2}}'  title='{{t2}}'>F1/L2 {{l2}}</td>
+              <td id="id_3" class='cell-{{k3}}'  title='{{t3}}'>D1/L3 {{l3}}</td>
+              <td id="id_4" class='cell-{{k4}}'  title='{{t4}}'>TB1/L4 {{l4}}</td>
+              <td id="id_5" class='cell-{{k5}}'  title='{{t5}}'>TG1/L5 {{l5}}</td>
+              <td id="id_6" class='cell-{{k6}}'  title='{{t6}}'>L6 {{l6}}</td>
               <td></td>
-              <td id='cell-{{k31}}'>A2/L31 {{l31}}</td>
-              <td id='cell-{{k32}}'>F2/L32 {{l32}}</td>
-              <td id='cell-{{k33}}'>D2/L33 {{l33}}</td>
-              <td id='cell-{{k35}}'>TG2/L35 {{l34}}</td>
-              <td id='cell-{{k34}}'>TB2/L34 {{l35}}</td>
-              <td id='cell-{{k36}}'>L36 {{l36}}</td>
+              <td id="id_31" class='cell-{{k31}}'  title='{{t31}}'>A2/L31 {{l31}}</td>
+              <td id="id_32" class='cell-{{k32}}'  title='{{t32}}'>F2/L32 {{l32}}</td>
+              <td id="id_33" class='cell-{{k33}}' title='{{t33}}'>D2/L33 {{l33}}</td>
+              <td id="id_34" class='cell-{{k35}}' title='{{t34}}'>TB2/L35 {{l34}}</td>
+              <td id="id_35" class='cell-{{k34}}' title='{{t35}}'>TG2/L34 {{l35}}</td>
+              <td id="id_36" class='cell-{{k36}}' title='{{t36}}'>L36 {{l36}}</td>
             </tr>
             <tr>
 
               <th>Tuesday</th>
-              <td id='cell-{{k7}}'>B1/L7 {{l7}}</td>
-              <td id='cell-{{k8}}'>G1/L8 {{l8}}</td>
-              <td id='cell-{{k9}}'>E1/L9 {{l9}}</td>
-              <td id='cell-{{k10}}'>TC1/L10 {{l10}}</td>
-              <td id='cell-{{k11}}'>TAA1/L11 {{l11}}</td>
-              <td id='cell-{{k12}}'>L12 {{l12}}</td>
+              <td id="id_7" class='cell-{{k7}}' title='{{t7}}'>B1/L7 {{l7}}</td>
+              <td id="id_8" class='cell-{{k8}}' title='{{t8}}'>G1/L8 {{l8}}</td>
+              <td id="id_9" class='cell-{{k9}}' title='{{t9}}'>E1/L9 {{l9}}</td>
+              <td id="id_10" class='cell-{{k10}}' title='{{t10}}'>TC1/L10 {{l10}}</td>
+              <td id="id_11" class='cell-{{k11}}' title='{{t11}}'>TAA1/L11 {{l11}}</td>
+              <td id="id_12" class='cell-{{k12}}' title='{{t12}}'>L12 {{l12}}</td>
               <td></td>
-              <td id='cell-{{k37}}'>B2/L37 {{l37}}</td>
-              <td id='cell-{{k38}}'>G2/L38 {{l38}}</td>
-              <td id='cell-{{k39}}'>E2/L39 {{l39}}</td>
-              <td id='cell-{{k40}}'>TC2/L40 {{l40}}</td>
-              <td id='cell-{{k41}}'>TAA2/L41 {{l41}}</td>
-              <td id='cell-{{k42}}'>L42 {{l42}}</td>
+              <td id="id_37" class='cell-{{k37}}' title='{{t37}}'>B2/L37 {{l37}}</td>
+              <td id="id_38" class='cell-{{k38}}' title='{{t38}}'>G2/L38 {{l38}}</td>
+              <td id="id_39" class='cell-{{k39}}' title='{{t39}}'>E2/L39 {{l39}}</td>
+              <td id="id_40" class='cell-{{k40}}' title='{{t40}}'>TC2/L40 {{l40}}</td>
+              <td id="id_41" class='cell-{{k41}}' title='{{t41}}'>TAA2/L41 {{l41}}</td>
+              <td id="id_42" class='cell-{{k42}}' title='{{t42}}'>L42 {{l42}}</td>
             </tr>
             <tr>
-
               <th>Wednesday</th>
-              <td id='cell-{{k13}}'>C1/L13 {{l13}}</td>
-              <td id='cell-{{k14}}'>A1/L14 {{l14}}</td>
-              <td id='cell-{{k15}}'>F1/L15 {{l15}}</td>
-              <td id='cell-{{k16}}'>TD1/L16 {{l16}}</td>
+              <td id="id_13" class='cell-{{k13}}' title='{{t13}}'>C1/L13 {{l13}}</td>
+              <td id="id_14" class='cell-{{k14}}' title='{{t14}}'>A1/L14 {{l14}}</td>
+              <td id="id_15" class='cell-{{k15}}' title='{{t15}}'>F1/L15 {{l15}}</td>
+              <td id="id_16" class='cell-{{k16}}' title='{{t16}}'>TD1/L16 {{l16}}</td>
               <td>Extra</td>
               <td>Mural Hour</td>
               <td></td>
-              <td id='cell-{{k43}}'>C2/L43 {{l43}}</td>
-              <td id='cell-{{k44}}'>A2/L44 {{l44}}</td>
-              <td id='cell-{{k45}}'>F2/L45 {{l45}}</td>
-              <td id='cell-{{k46}}'>TD2/L46 {{l46}}</td>
-              <td id='cell-{{k47}}'>TBB2/L47 {{l47}}</td>
-              <td id='cell-{{k48}}'>L48 {{l48}}</td>
+              <td id="id_43" class='cell-{{k43}}' title='{{t43}}'>C2/L43 {{l43}}</td>
+              <td id="id_44" class='cell-{{k44}}' title='{{t44}}'>A2/L44 {{l44}}</td>
+              <td id="id_45" class='cell-{{k45}}' title='{{t45}}'>F2/L45 {{l45}}</td>
+              <td id="id_46" class='cell-{{k46}}' title='{{t46}}'>TD2/L46 {{l46}}</td>
+              <td id="id_47" class='cell-{{k47}}' title='{{t47}}'>TBB2/L47 {{l47}}</td>
+              <td id="id_48" class='cell-{{k48}}' title='{{t48}}'>L48 {{l48}}</td>
             </tr>
             <tr>
 
               <th>Thursday</th>
-              <td id='cell-{{k19}}'>D1/L19 {{l19}}</td>
-              <td id='cell-{{k20}}'>B1/L20 {{l20}}</td>
-              <td id='cell-{{k21}}'>G1/L21 {{l21}}</td>
-              <td id='cell-{{k22}}'>TE1/L22 {{l22}}</td>
-              <td id='cell-{{k23}}'>TCC1/L23 {{l23}}</td>
-              <td id='cell-{{k24}}'>L24 {{l24}}</td>
+              <td id="id_19" class='cell-{{k19}}' title='{{t19}}'>D1/L19 {{l19}}</td>
+              <td id="id_20" class='cell-{{k20}}' title='{{t20}}'>B1/L20 {{l20}}</td>
+              <td id="id_21" class='cell-{{k21}}' title='{{t21}}'>G1/L21 {{l21}}</td>
+              <td id="id_22" class='cell-{{k22}}' title='{{t22}}'>TE1/L22 {{l22}}</td>
+              <td id="id_23" class='cell-{{k23}}' title='{{t23}}'>TCC1/L23 {{l23}}</td>
+              <td id="id_24" class='cell-{{k24}}' title='{{t24}}'>L24 {{l24}}</td>
               <td></td>
-              <td id='cell-{{k49}}'>D2/L49 {{l49}}</td>
-              <td id='cell-{{k50}}'>B2/L50 {{l50}}</td>
-              <td id='cell-{{k51}}'>G2/L51 {{l51}}</td>
-              <td id='cell-{{k52}}'>TE2/L52 {{l52}}</td>
-              <td id='cell-{{k53}}'>TCC2/L53 {{l53}}</td>
-              <td id='cell-{{k54}}'>L54 {{l54}}</td>
+              <td id="id_49" class='cell-{{k49}}' title='{{t49}}'>D2/L49 {{l49}}</td>
+              <td id="id_50" class='cell-{{k50}}' title='{{t50}}'>B2/L50 {{l50}}</td>
+              <td id="id_51" class='cell-{{k51}}' title='{{t51}}'>G2/L51 {{l51}}</td>
+              <td id="id_52" class='cell-{{k52}}' title='{{t52}}'>TE2/L52 {{l52}}</td>
+              <td id="id_53" class='cell-{{k53}}' title='{{t53}}'>TCC2/L53 {{l53}}</td>
+              <td id="id_54" class='cell-{{k54}}' title='{{t54}}'>L54 {{l54}}</td>
             </tr>
             <tr>
               <th>Friday</th>
-              <td id='cell-{{k25}}'>E1/L25 {{l25}}</td>
-              <td id='cell-{{k26}}'>C1/L26 {{l26}}</td>
-              <td id='cell-{{k27}}'>TA1/L27 {{l27}}</td>
-              <td id='cell-{{k28}}'>TF1/L28 {{l28}}</td>
-              <td id='cell-{{k29}}'>TDD1/L29 {{l29}}</td>
-              <td id='cell-{{k30}}'>L30 {{l30}}</td>
+              <td id="id_25" class='cell-{{k25}}' title='{{t25}}'>E1/L25 {{l25}}</td>
+              <td id="id_26" class='cell-{{k26}}' title='{{t26}}'>C1/L26 {{l26}}</td>
+              <td id="id_27" class='cell-{{k27}}' title='{{t27}}'>TA1/L27 {{l27}}</td>
+              <td id="id_28" class='cell-{{k28}}' title='{{t28}}'>TF1/L28 {{l28}}</td>
+              <td id="id_29" class='cell-{{k29}}' title='{{t29}}'>TDD1/L29 {{l29}}</td>
+              <td id="id_30" class='cell-{{k30}}' title='{{t30}}'>L30 {{l30}}</td>
               <td></td>
-              <td id='cell-{{k55}}'>E2/L55 {{l55}}</td>
-              <td id='cell-{{k56}}'>C2/L56 {{l56}}</td>
-              <td id='cell-{{k57}}'>TA2/L57 {{l57}}</td>
-              <td id='cell-{{k58}}'>TF2/L58 {{l58}}</td>
-              <td id='cell-{{k59}}'>TDD2/L59 {{l59}}</td>
-              <td id='cell-{{k60}}'>L60 {{l60}}</td>
+              <td id="id_55" class='cell-{{k55}}' title='{{t55}}'>E2/L55 {{l55}}</td>
+              <td id="id_56" class='cell-{{k56}}' title='{{t56}}'>C2/L56 {{l56}}</td>
+              <td id="id_57" class='cell-{{k57}}' title='{{t57}}'>TA2/L57 {{l57}}</td>
+              <td id="id_58" class='cell-{{k58}}' title='{{t58}}'>TF2/L58 {{l58}}</td>
+              <td id="id_59" class='cell-{{k59}}' title='{{t59}}'>TDD2/L59 {{l59}}</td>
+              <td id="id_60" class='cell-{{k60}}' title='{{t60}}'>L60 {{l60}}</td>
             </tr>
 
             </tbody>
           </table>
+          <tr width=100%>
+      <td style="border:None">
+    <a href="/output_page_prev/" class='btn btn-primary'>Prev</a>
+    <a href="/" class="btn btn-primary">Go to Home</a>
+    <a href="/output_page_next/" class='btn btn-primary'>Next</a></td>
+    <td style="border:None">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form|crispy }}
+
+    </td>
+    <td style="border:None">
+        <button type="submit" class="btn btn-primary">Submit</button></td>
+
+          <script>
+            $('#play').click(function(){
+              title_disp();
+            })
+          </script>
         </div>
       </div>
-    <a href="/output_page_next/" class='btn btn-primary'>Prev</a>
-    <a href="/" class="btn btn-primary">Go to Home</a>
-    <a href="/output_page_prev/" class='btn btn-primary'>Next</a>
+      <p>{% for ix in t %}
+      {{ix}}
+      <br>
+    {% endfor %}</p>
+    <table style="border:None" width=100%>
+      
+
+  </table>
   </body>
 </html>

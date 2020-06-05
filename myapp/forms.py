@@ -11,3 +11,5 @@ class input2form(forms.Form):
         #print(n)
         for i in range (n):
             self.fields['course %d' %i]=forms.CharField(max_length=10)
+class gotoform(forms.Form):
+    num=forms.DecimalField(widget=forms.NumberInput(attrs={"class": "form-control", "placeholder":"Course Count",}), label ='go to timetable number',max_digits=8,decimal_places=0, min_value=0,required=False)

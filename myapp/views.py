@@ -58,15 +58,15 @@ def input2(request):
     if request.method == 'POST':
         form=input2form(n,request.POST)
         if form.is_valid():
-            #print(n,'hi')
+            #qwerty(n,'hi')
             for i in range (int(n)):
-                #print(i)
+                #qwerty(i)
                 if form.cleaned_data.get('course %d' %i) in listx:
                     pass
                 else:
-                    listx.append((course.objects.filter(course_code=form.cleaned_data.get('course %d' %i)))[0])
+                    listx.append((course.objects.filter(course_code=(form.cleaned_data.get('course %d' %i)).upper()))[0])
                     try:
-                        listx.append((course.objects.filter(course_code=form.cleaned_data.get('course %d' %i)+'L'))[0])
+                        listx.append((course.objects.filter(course_code=(form.cleaned_data.get('course %d' %i)).upper()+'L'))[0])
                     except:
                         pass
             if form.cleaned_data.get('theory')=='Either Morning or Evening Theory':
@@ -75,11 +75,13 @@ def input2(request):
                 return redirect('/morning_only')
             elif form.cleaned_data.get('theory')=='Evening Only Theory':
                 return redirect('/evening_only')
-            #print(listx)
+            elif form.cleaned_data.get('theory')=='All':
+                return redirect('/any_theory')
+            #qwerty(listx)
 
     else:
         form=input2form(n)
-        #print(form)
+        #qwerty(form)
     return render(request, 'input2.html', {
         'form': form
     })
@@ -89,11 +91,11 @@ def input1(request):
         form = input1form(request.POST)
         if form.is_valid():
             n=int(form.cleaned_data.get('num'))
-            #print(n)
+            #qwerty(n)
         return(redirect('/input2'))
     else:
         form = input1form()
-        #print(form)
+        #qwerty(form)
     return render(request, 'input1.html', {
         'form': form
     })
@@ -133,10 +135,10 @@ def offer_up(request):
     io_string=io.StringIO(dataset)
     next(io_string)
     for column in csv.reader(io_string,delimiter=','):
-        #print(str(column[3]))
+        #qwerty(str(column[3]))
         # considering you post user_list of usernames as 'username1,username2,username3'
         #if column[0]=='423':
-        #print(column)
+        #qwerty(column)
         if column[3][0]=='L':
 
             if len(course.objects.filter(course_code=column[1]+'L'))==0:
@@ -208,23 +210,23 @@ def output(request):
         q=[]
         p=0
         k1=[]
-        #print(x)
+        #qwerty(x)
         for j in x:
             k2=[]
             k=[]
             t=offer_set.objects.filter(offer_id=j)
-            #print(j.offer_id,t)
+            #qwerty(j.offer_id,t)
 
             for c in t:
-            #    #print(c.slot_id.slot_name,end=' ')
+            #    #qwerty(c.slot_id.slot_name,end=' ')
                 y=slot.objects.filter(slot_name=c.slot_id.slot_name)
                 if c.slot_id.slot_name not in k2:
                     k2.append(c.slot_id.slot_name)
                 for d in y:
                     k.append(int(d.slot_id))
 
-            #print(k2)
-            #print(k,q)
+            #qwerty(k2)
+            #qwerty(k,q)
             if (k in q) or p==1:
                 pass
             else:
@@ -234,9 +236,9 @@ def output(request):
             offer_id.append(q)
         if k1!=[]:
             offer_id1.append(k1)
-    #print(offer_id)
+    #qwerty(offer_id)
     lenlistx=len(listx)
-    #print(offer_id1,'\n',offer_id)
+    #qwerty(offer_id1,'\n',offer_id)
     global course_list
     course_list=[]
     global course_list2
@@ -245,133 +247,133 @@ def output(request):
     course_list3=[]
     try:
         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10],offer_id[11]):
-            #print(j)
+            #qwerty(j)
             course_list2.append(j)
     except:
         try:
             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10]):
-                #print(j)
+                #qwerty(j)
                 course_list2.append(j)
         except:
             try:
                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9]):
-                    #print(j)
+                    #qwerty(j)
                     course_list2.append(j)
             except:
                 try:
                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8]):
-                        #print(j)
+                        #qwerty(j)
                         course_list2.append(j)
                 except:
                     try:
                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7]):
-                            #print(j)
+                            #qwerty(j)
                             course_list2.append(j)
                     except:
                         try:
                             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6]):
-                                #print(j)
+                                #qwerty(j)
                                 course_list2.append(j)
                         except:
                             try:
                                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5]):
-                                    #print(j)
+                                    #qwerty(j)
                                     course_list2.append(j)
                             except:
                                 try:
                                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4]):
-                                        #print(j)
+                                        #qwerty(j)
                                         course_list2.append(j)
                                 except:
                                     try:
                                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3]):
-                                            #print(j)
+                                            #qwerty(j)
                                             course_list2.append(j)
                                     except:
                                         try:
                                             for j in it.product(offer_id[0],offer_id[1],offer_id[2]):
-                                                #print(j)
+                                                #qwerty(j)
                                                 course_list2.append(j)
                                         except:
                                             try:
                                                 for j in it.product(offer_id[0],offer_id[1]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
                                             except:
                                                 for j in it.product(offer_id[0]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
     if course_list2==[]:
         return render(request,'failed.html')
-    #print(len(course_list2))
+    #qwerty(len(course_list2))
     final_list=[]
     can_list=[]
     final_course_list=[]
     c=0
     global final_courses
     final_courses=[]
-    #print(k1)
-    #print('hi')
-    #print(len(k1))
+    #qwerty(k1)
+    #qwerty('hi')
+    #qwerty(len(k1))
     try:
     	for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9],offer_id1[10],offer_id1[11]):
-    		#print(j)
+    		#qwerty(j)
     		course_list3.append(j)
     except:
     	try:
     		for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9],offer_id1[10]):
-    			#print(j)
+    			#qwerty(j)
     			course_list3.append(j)
     	except:
     		try:
     			for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9]):
-    				#print(j)
+    				#qwerty(j)
     				course_list3.append(j)
     		except:
     			try:
     				for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8]):
-    					#print(j)
+    					#qwerty(j)
     					course_list3.append(j)
     			except:
     				try:
     					for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7]):
-    						#print(j)
+    						#qwerty(j)
     						course_list3.append(j)
     				except:
     					try:
     						for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6]):
-    							#print(j)
+    							#qwerty(j)
     							course_list3.append(j)
     					except:
     						try:
     							for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5]):
-    								#print(j)
+    								#qwerty(j)
     								course_list3.append(j)
     						except:
     							try:
     								for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4]):
-    									#print(j)
+    									#qwerty(j)
     									course_list3.append(j)
     							except:
     								try:
     									for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3]):
-    										#print(j)
+    										#qwerty(j)
     										course_list3.append(j)
     								except:
     									try:
     										for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2]):
-    											#print(j)
+    											#qwerty(j)
     											course_list3.append(j)
     									except:
     										try:
     											for j in it.product(offer_id1[0],offer_id1[1]):
-    												#print(j)
+    												#qwerty(j)
     												course_list3.append(j)
     										except:
     											for j in it.product(offer_id1[0]):
-    												#print(j)
+    												#qwerty(j)
     												course_list3.append(j)
-    #print('hi')
+    #qwerty('hi')
     final_course_list1=[]
     course_list1=[]
     for i in course_list3:
@@ -380,15 +382,15 @@ def output(request):
     	for j in i:
     		for k in j:
     			x.append(k)
-                #   #print(str(i),str(j),str(k))
+                #   #qwerty(str(i),str(j),str(k))
     			y.append(listx[(i.index(j))])
     	final_course_list1.append(y)
     	course_list1.append(x)
 
 
-    #print(listx)
+    #qwerty(listx)
     for i in range(lenlistx):
-        #print(str(listx[i]))
+        #qwerty(str(listx[i]))
         listx[i]=str(listx[i])[15:-1:]
     for i in course_list2:
         x=[]
@@ -402,7 +404,7 @@ def output(request):
 
 
     del course_list2
-    #print(course_list1[0])
+    #qwerty(course_list1[0])
     for i in range(len(final_course_list1)-1,-1,-1):
         m=0
         e=0
@@ -415,12 +417,12 @@ def output(request):
             final_course_list.pop(i)
             course_list.pop(i)
             course_list1.pop(i)
-    #print(course_list)
-    #print(len(final_course_list[0]))
-    #print(final_course_list,course_list)
-    #print(final_course_list)
+    #qwerty(course_list)
+    #qwerty(len(final_course_list[0]))
+    #qwerty(final_course_list,course_list)
+    #qwerty(final_course_list)
     for i in range(len(final_course_list)):
-        #print(i)
+        #qwerty(i)
         i_list=[]
         for j in range(len(course_list[i])-1):
             for k in range(len(course_list[i])-1):
@@ -442,7 +444,7 @@ def output(request):
         # w=list(x)
         # y=list(i)
         # z=sorted(y)
-        #print(w,x,y,z)
+        #qwerty(w,x,y,z)
          #    for j in range(1,6,1):
          #        for k in range(1,6,1):
          #            canvas=tk.Canvas(width=500,height=200,bg='yellow')
@@ -459,7 +461,7 @@ def output(request):
          #    can_list.append(canvas
     if final_list==[]:
         return render(request,'failed2.html')
-    #print(c)
+    #qwerty(c)
     global final_dict
     final_dict=[]
     global final_dict2
@@ -476,7 +478,8 @@ def output(request):
             else:
                 final_dict[len(final_dict)-1].append(0)
                 final_dict2[len(final_dict2)-1].append('')
-    #print(len(final_dict))
+
+    #qwerty(len(final_dict))
     return redirect('/output_page_next/')
 
 def any_theory(request):
@@ -491,23 +494,23 @@ def any_theory(request):
         q=[]
         p=0
         k1=[]
-        #print(x)
+        #qwerty(x)
         for j in x:
             k2=[]
             k=[]
             t=offer_set.objects.filter(offer_id=j)
-            #print(j.offer_id,t)
+            #qwerty(j.offer_id,t)
 
             for c in t:
-            #    #print(c.slot_id.slot_name,end=' ')
+            #    #qwerty(c.slot_id.slot_name,end=' ')
                 y=slot.objects.filter(slot_name=c.slot_id.slot_name)
                 if c.slot_id.slot_name not in k2:
                     k2.append(c.slot_id.slot_name)
                 for d in y:
                     k.append(int(d.slot_id))
 
-            #print(k2)
-            #print(k,q)
+            #qwerty(k2)
+            #qwerty(k,q)
             if (k in q) or p==1:
                 pass
             else:
@@ -517,9 +520,9 @@ def any_theory(request):
             offer_id.append(q)
         if k1!=[]:
             offer_id1.append(k1)
-    #print(offer_id)
+    #qwerty(offer_id)
     lenlistx=len(listx)
-    #print(offer_id1,'\n',offer_id)
+    #qwerty(offer_id1,'\n',offer_id)
     global course_list
     course_list=[]
     global course_list2
@@ -528,75 +531,75 @@ def any_theory(request):
     course_list3=[]
     try:
         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10],offer_id[11]):
-            #print(j)
+            #qwerty(j)
             course_list2.append(j)
     except:
         try:
             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10]):
-                #print(j)
+                #qwerty(j)
                 course_list2.append(j)
         except:
             try:
                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9]):
-                    #print(j)
+                    #qwerty(j)
                     course_list2.append(j)
             except:
                 try:
                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8]):
-                        #print(j)
+                        #qwerty(j)
                         course_list2.append(j)
                 except:
                     try:
                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7]):
-                            #print(j)
+                            #qwerty(j)
                             course_list2.append(j)
                     except:
                         try:
                             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6]):
-                                #print(j)
+                                #qwerty(j)
                                 course_list2.append(j)
                         except:
                             try:
                                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5]):
-                                    #print(j)
+                                    #qwerty(j)
                                     course_list2.append(j)
                             except:
                                 try:
                                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4]):
-                                        #print(j)
+                                        #qwerty(j)
                                         course_list2.append(j)
                                 except:
                                     try:
                                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3]):
-                                            #print(j)
+                                            #qwerty(j)
                                             course_list2.append(j)
                                     except:
                                         try:
                                             for j in it.product(offer_id[0],offer_id[1],offer_id[2]):
-                                                #print(j)
+                                                #qwerty(j)
                                                 course_list2.append(j)
                                         except:
                                             try:
                                                 for j in it.product(offer_id[0],offer_id[1]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
                                             except:
                                                 for j in it.product(offer_id[0]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
     if course_list2==[]:
         return render(request,'failed.html')
-    #print(len(course_list2))
+    #qwerty(len(course_list2))
     final_list=[]
     can_list=[]
     final_course_list=[]
     c=0
     global final_courses
     final_courses=[]
-    #print(k1)
-    #print('hi')
-    #print(len(k1))
-    #print('hi')
+    #qwerty(k1)
+    #qwerty('hi')
+    #qwerty(len(k1))
+    #qwerty('hi')
     final_course_list1=[]
     course_list1=[]
     for i in course_list3:
@@ -605,15 +608,15 @@ def any_theory(request):
     	for j in i:
     		for k in j:
     			x.append(k)
-                #   #print(str(i),str(j),str(k))
+                #   #qwerty(str(i),str(j),str(k))
     			y.append(listx[(i.index(j))])
     	final_course_list1.append(y)
     	course_list1.append(x)
 
 
-    #print(listx)
+    #qwerty(listx)
     for i in range(lenlistx):
-        #print(str(listx[i]))
+        #qwerty(str(listx[i]))
         listx[i]=str(listx[i])[15:-1:]
     for i in course_list2:
         x=[]
@@ -627,13 +630,13 @@ def any_theory(request):
 
 
     del course_list2
-    #print(course_list1[0])
-    #print(course_list)
-    #print(len(final_course_list[0]))
-    #print(final_course_list,course_list)
-    #print(final_course_list)
+    #qwerty(course_list1[0])
+    #qwerty(course_list)
+    #qwerty(len(final_course_list[0]))
+    #qwerty(final_course_list,course_list)
+    #qwerty(final_course_list)
     for i in range(len(final_course_list)):
-        #print(i)
+        #qwerty(i)
         i_list=[]
         for j in range(len(course_list[i])-1):
             for k in range(len(course_list[i])-1):
@@ -655,7 +658,7 @@ def any_theory(request):
         # w=list(x)
         # y=list(i)
         # z=sorted(y)
-        #print(w,x,y,z)
+        #qwerty(w,x,y,z)
          #    for j in range(1,6,1):
          #        for k in range(1,6,1):
          #            canvas=tk.Canvas(width=500,height=200,bg='yellow')
@@ -672,7 +675,7 @@ def any_theory(request):
          #    can_list.append(canvas
     if final_list==[]:
         return render(request,'failed2.html')
-    #print(c)
+    #qwerty(c)
     global final_dict
     final_dict=[]
     global final_dict2
@@ -689,9 +692,11 @@ def any_theory(request):
             else:
                 final_dict[len(final_dict)-1].append(0)
                 final_dict2[len(final_dict2)-1].append('')
-    #print(len(final_dict))
+    #qwerty(len(final_dict))
+    global ins
+    ins=-1
     return redirect('/output_page_next/')
-    #print(final_dict,final_dict[0]['0'])
+    #qwerty(final_dict,final_dict[0]['0'])
 
 def evening_only(request):
     global listx
@@ -705,23 +710,23 @@ def evening_only(request):
         q=[]
         p=0
         k1=[]
-        #print(x)
+        #qwerty(x)
         for j in x:
             k2=[]
             k=[]
             t=offer_set.objects.filter(offer_id=j)
-            #print(j.offer_id,t)
+            #qwerty(j.offer_id,t)
 
             for c in t:
-            #    #print(c.slot_id.slot_name,end=' ')
+            #    #qwerty(c.slot_id.slot_name,end=' ')
                 y=slot.objects.filter(slot_name=c.slot_id.slot_name)
                 if c.slot_id.slot_name not in k2:
                     k2.append(c.slot_id.slot_name)
                 for d in y:
                     k.append(int(d.slot_id))
 
-            #print(k2)
-            #print(k,q)
+            #qwerty(k2)
+            #qwerty(k,q)
             if (k in q) or p==1:
                 pass
             else:
@@ -731,9 +736,9 @@ def evening_only(request):
             offer_id.append(q)
         if k1!=[]:
             offer_id1.append(k1)
-    #print(offer_id)
+    #qwerty(offer_id)
     lenlistx=len(listx)
-    #print(offer_id1,'\n',offer_id)
+    #qwerty(offer_id1,'\n',offer_id)
     global course_list
     course_list=[]
     global course_list2
@@ -742,61 +747,61 @@ def evening_only(request):
     course_list3=[]
     try:
         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10],offer_id[11]):
-            #print(j)
+            #qwerty(j)
             course_list2.append(j)
     except:
         try:
             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10]):
-                #print(j)
+                #qwerty(j)
                 course_list2.append(j)
         except:
             try:
                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9]):
-                    #print(j)
+                    #qwerty(j)
                     course_list2.append(j)
             except:
                 try:
                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8]):
-                        #print(j)
+                        #qwerty(j)
                         course_list2.append(j)
                 except:
                     try:
                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7]):
-                            #print(j)
+                            #qwerty(j)
                             course_list2.append(j)
                     except:
                         try:
                             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6]):
-                                #print(j)
+                                #qwerty(j)
                                 course_list2.append(j)
                         except:
                             try:
                                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5]):
-                                    #print(j)
+                                    #qwerty(j)
                                     course_list2.append(j)
                             except:
                                 try:
                                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4]):
-                                        #print(j)
+                                        #qwerty(j)
                                         course_list2.append(j)
                                 except:
                                     try:
                                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3]):
-                                            #print(j)
+                                            #qwerty(j)
                                             course_list2.append(j)
                                     except:
                                         try:
                                             for j in it.product(offer_id[0],offer_id[1],offer_id[2]):
-                                                #print(j)
+                                                #qwerty(j)
                                                 course_list2.append(j)
                                         except:
                                             try:
                                                 for j in it.product(offer_id[0],offer_id[1]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
                                             except:
                                                 for j in it.product(offer_id[0]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
     if course_list2==[]:
         print('fail1')
@@ -808,68 +813,68 @@ def evening_only(request):
     c=0
     global final_courses
     final_courses=[]
-    #print(k1)
-    #print('hi')
-    #print(len(k1))
+    #qwerty(k1)
+    #qwerty('hi')
+    #qwerty(len(k1))
     try:
     	for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9],offer_id1[10],offer_id1[11]):
-    		#print(j)
+    		#qwerty(j)
     		course_list3.append(j)
     except:
     	try:
     		for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9],offer_id1[10]):
-    			#print(j)
+    			#qwerty(j)
     			course_list3.append(j)
     	except:
     		try:
     			for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9]):
-    				#print(j)
+    				#qwerty(j)
     				course_list3.append(j)
     		except:
     			try:
     				for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8]):
-    					#print(j)
+    					#qwerty(j)
     					course_list3.append(j)
     			except:
     				try:
     					for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7]):
-    						#print(j)
+    						#qwerty(j)
     						course_list3.append(j)
     				except:
     					try:
     						for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6]):
-    							#print(j)
+    							#qwerty(j)
     							course_list3.append(j)
     					except:
     						try:
     							for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5]):
-    								#print(j)
+    								#qwerty(j)
     								course_list3.append(j)
     						except:
     							try:
     								for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4]):
-    									#print(j)
+    									#qwerty(j)
     									course_list3.append(j)
     							except:
     								try:
     									for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3]):
-    										#print(j)
+    										#qwerty(j)
     										course_list3.append(j)
     								except:
     									try:
     										for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2]):
-    											#print(j)
+    											#qwerty(j)
     											course_list3.append(j)
     									except:
     										try:
     											for j in it.product(offer_id1[0],offer_id1[1]):
-    												#print(j)
+    												#qwerty(j)
     												course_list3.append(j)
     										except:
     											for j in it.product(offer_id1[0]):
-    												#print(j)
+    												#qwerty(j)
     												course_list3.append(j)
-    #print('hi')
+    #qwerty('hi')
     final_course_list1=[]
     course_list1=[]
     for i in course_list3:
@@ -878,15 +883,15 @@ def evening_only(request):
     	for j in i:
     		for k in j:
     			x.append(k)
-                #   #print(str(i),str(j),str(k))
+                #   #qwerty(str(i),str(j),str(k))
     			y.append(listx[(i.index(j))])
     	final_course_list1.append(y)
     	course_list1.append(x)
 
 
-    #print(listx)
+    #qwerty(listx)
     for i in range(lenlistx):
-        #print(str(listx[i]))
+        #qwerty(str(listx[i]))
         listx[i]=str(listx[i])[15:-1:]
     for i in course_list2:
         x=[]
@@ -900,11 +905,11 @@ def evening_only(request):
 
 
     del course_list2
-    #print(course_list1[0])
+    #qwerty(course_list1[0])
     for i in range(len(final_course_list1)-1,-1,-1):
         m=0
         e=0
-        #print(course_list1[i])
+        #qwerty(course_list1[i])
         for j in course_list1[i]:
             if j[0]!='L' and j[len(j)-1]=='1':
                 m=1
@@ -915,12 +920,12 @@ def evening_only(request):
             final_course_list.pop(i)
             course_list.pop(i)
             course_list1.pop(i)
-    #print(course_list)
-    #print(len(final_course_list[0]))
-    #print(final_course_list,course_list)
-    #print(final_course_list)
+    #qwerty(course_list)
+    #qwerty(len(final_course_list[0]))
+    #qwerty(final_course_list,course_list)
+    #qwerty(final_course_list)
     for i in range(len(final_course_list)):
-        #print(i)
+        #qwerty(i)
         i_list=[]
         for j in range(len(course_list[i])-1):
             for k in range(len(course_list[i])-1):
@@ -942,7 +947,7 @@ def evening_only(request):
         # w=list(x)
         # y=list(i)
         # z=sorted(y)
-        #print(w,x,y,z)
+        #qwerty(w,x,y,z)
          #    for j in range(1,6,1):
          #        for k in range(1,6,1):
          #            canvas=tk.Canvas(width=500,height=200,bg='yellow')
@@ -961,24 +966,52 @@ def evening_only(request):
         print('fail2')
         return render(request,'failed2.html')
 
-    #print(c)
+    #qwerty(c)
+
+    global teacher_list
+    teacher_list=[]
     global final_dict
     final_dict=[]
     global final_dict2
     final_dict2=[]
     for i in final_list:
         c=0
+        teacher_list.append([])
         final_dict.append([])
         final_dict2.append([])
         for j in range(1,61):
             if j in i:
                 final_dict[len(final_dict)-1].append(1)
                 final_dict2[len(final_dict2)-1].append(final_courses[final_list.index(i)][c])
+                x=offer_set.objects.filter(slot_id=j)
+                #print(final_dict2[len(final_dict2)-1][])
+                y=course.objects.filter(course_code=final_courses[final_list.index(i)][c])
+                #print(final_courses[final_list.index(i)][c],y)
+                #print(len(x),len(y))
+                teachers=''
+                for l in x:
+                    #print(l)
+                        #print("hi")
+                        #print(l.offer_id.offer_id,k.course_code)
+                    #print(l,l.offer_id,l.offer_id.offer_id,y[0])
+                    t=offering.objects.filter(offer_id=l.offer_id.offer_id,course_code=y[0])
+
+                    #if t==[]:
+                        #print(final_courses[final_list.index(i)][c],j)
+                        #print(len(t))
+                    for t1 in t:
+                        #print(t1.emp_code.name)
+                        teachers=teachers+t1.emp_code.name+"\n"
+                teacher_list[len(teacher_list)-1].append(teachers)
+
                 c+=1
             else:
                 final_dict[len(final_dict)-1].append(0)
                 final_dict2[len(final_dict2)-1].append('')
-    #print(len(final_dict))
+                teacher_list[len(teacher_list)-1].append('')
+    print(teacher_list)
+    global ins
+    ins=-1
     return redirect('/output_page_next/')
 def morning_only(request):
     global listx
@@ -986,41 +1019,43 @@ def morning_only(request):
     global offer_id
     offer_id = []
     offer_id1=[]
-
     for i in listx:
         x=offering.objects.filter(course_code=i)
         q=[]
         p=0
         k1=[]
-        #print(x)
+
+        #qwerty(x)
+
         for j in x:
             k2=[]
             k=[]
             t=offer_set.objects.filter(offer_id=j)
-            #print(j.offer_id,t)
+            #qwerty(j.offer_id,t)
 
             for c in t:
-            #    #print(c.slot_id.slot_name,end=' ')
+            #    #qwerty(c.slot_id.slot_name,end=' ')
                 y=slot.objects.filter(slot_name=c.slot_id.slot_name)
                 if c.slot_id.slot_name not in k2:
                     k2.append(c.slot_id.slot_name)
                 for d in y:
                     k.append(int(d.slot_id))
 
-            #print(k2)
-            #print(k,q)
+            #qwerty(k2)
+            #qwerty(k,q)
             if (k in q) or p==1:
                 pass
             else:
                 q.append(k)
                 k1.append(k2)
+
         if q!=[]:
             offer_id.append(q)
         if k1!=[]:
             offer_id1.append(k1)
-    #print(offer_id)
+    #qwerty(offer_id)
     lenlistx=len(listx)
-    #print(offer_id1,'\n',offer_id)
+    #qwerty(offer_id1,'\n',offer_id)
     global course_list
     course_list=[]
     global course_list2
@@ -1029,133 +1064,133 @@ def morning_only(request):
     course_list3=[]
     try:
         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10],offer_id[11]):
-            #print(j)
+            #qwerty(j)
             course_list2.append(j)
     except:
         try:
             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9],offer_id[10]):
-                #print(j)
+                #qwerty(j)
                 course_list2.append(j)
         except:
             try:
                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8],offer_id[9]):
-                    #print(j)
+                    #qwerty(j)
                     course_list2.append(j)
             except:
                 try:
                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7],offer_id[8]):
-                        #print(j)
+                        #qwerty(j)
                         course_list2.append(j)
                 except:
                     try:
                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6],offer_id[7]):
-                            #print(j)
+                            #qwerty(j)
                             course_list2.append(j)
                     except:
                         try:
                             for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5],offer_id[6]):
-                                #print(j)
+                                #qwerty(j)
                                 course_list2.append(j)
                         except:
                             try:
                                 for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4],offer_id[5]):
-                                    #print(j)
+                                    #qwerty(j)
                                     course_list2.append(j)
                             except:
                                 try:
                                     for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3],offer_id[4]):
-                                        #print(j)
+                                        #qwerty(j)
                                         course_list2.append(j)
                                 except:
                                     try:
                                         for j in it.product(offer_id[0],offer_id[1],offer_id[2],offer_id[3]):
-                                            #print(j)
+                                            #qwerty(j)
                                             course_list2.append(j)
                                     except:
                                         try:
                                             for j in it.product(offer_id[0],offer_id[1],offer_id[2]):
-                                                #print(j)
+                                                #qwerty(j)
                                                 course_list2.append(j)
                                         except:
                                             try:
                                                 for j in it.product(offer_id[0],offer_id[1]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
                                             except:
                                                 for j in it.product(offer_id[0]):
-                                                    #print(j)
+                                                    #qwerty(j)
                                                     course_list2.append(j)
     if course_list2==[]:
         return render(request,'failed.html')
-    #print(len(course_list2))
+    #qwerty(len(course_list2))
     final_list=[]
     can_list=[]
     final_course_list=[]
     c=0
     global final_courses
     final_courses=[]
-    #print(k1)
-    #print('hi')
-    #print(len(k1))
+    #qwerty(k1)
+    #qwerty('hi')
+    #qwerty(len(k1))
     try:
     	for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9],offer_id1[10],offer_id1[11]):
-    		#print(j)
+    		#qwerty(j)
     		course_list3.append(j)
     except:
     	try:
     		for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9],offer_id1[10]):
-    			#print(j)
+    			#qwerty(j)
     			course_list3.append(j)
     	except:
     		try:
     			for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8],offer_id1[9]):
-    				#print(j)
+    				#qwerty(j)
     				course_list3.append(j)
     		except:
     			try:
     				for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7],offer_id1[8]):
-    					#print(j)
+    					#qwerty(j)
     					course_list3.append(j)
     			except:
     				try:
     					for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6],offer_id1[7]):
-    						#print(j)
+    						#qwerty(j)
     						course_list3.append(j)
     				except:
     					try:
     						for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5],offer_id1[6]):
-    							#print(j)
+    							#qwerty(j)
     							course_list3.append(j)
     					except:
     						try:
     							for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4],offer_id1[5]):
-    								#print(j)
+    								#qwerty(j)
     								course_list3.append(j)
     						except:
     							try:
     								for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3],offer_id1[4]):
-    									#print(j)
+    									#qwerty(j)
     									course_list3.append(j)
     							except:
     								try:
     									for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2],offer_id1[3]):
-    										#print(j)
+    										#qwerty(j)
     										course_list3.append(j)
     								except:
     									try:
     										for j in it.product(offer_id1[0],offer_id1[1],offer_id1[2]):
-    											#print(j)
+    											#qwerty(j)
     											course_list3.append(j)
     									except:
     										try:
     											for j in it.product(offer_id1[0],offer_id1[1]):
-    												#print(j)
+    												#qwerty(j)
     												course_list3.append(j)
     										except:
     											for j in it.product(offer_id1[0]):
-    												#print(j)
+    												#qwerty(j)
     												course_list3.append(j)
-    #print('hi')
+    #qwerty('hi')
     final_course_list1=[]
     course_list1=[]
     for i in course_list3:
@@ -1164,15 +1199,15 @@ def morning_only(request):
     	for j in i:
     		for k in j:
     			x.append(k)
-                #   #print(str(i),str(j),str(k))
+                #   #qwerty(str(i),str(j),str(k))
     			y.append(listx[(i.index(j))])
     	final_course_list1.append(y)
     	course_list1.append(x)
 
 
-    #print(listx)
+    #qwerty(listx)
     for i in range(lenlistx):
-        #print(str(listx[i]))
+        #qwerty(str(listx[i]))
         listx[i]=str(listx[i])[15:-1:]
     for i in course_list2:
         x=[]
@@ -1186,7 +1221,7 @@ def morning_only(request):
 
 
     del course_list2
-    #print(course_list1[0])
+    #qwerty(course_list1[0])
     for i in range(len(final_course_list1)-1,-1,-1):
         m=0
         e=0
@@ -1199,12 +1234,12 @@ def morning_only(request):
             final_course_list.pop(i)
             course_list.pop(i)
             course_list1.pop(i)
-    #print(course_list)
-    #print(len(final_course_list[0]))
-    #print(final_course_list,course_list)
-    #print(final_course_list)
+    #qwerty(course_list)
+    #qwerty(len(final_course_list[0]))
+    #qwerty(final_course_list,course_list)
+    #qwerty(final_course_list)
     for i in range(len(final_course_list)):
-        #print(i)
+        #qwerty(i)
         i_list=[]
         for j in range(len(course_list[i])-1):
             for k in range(len(course_list[i])-1):
@@ -1226,7 +1261,7 @@ def morning_only(request):
         # w=list(x)
         # y=list(i)
         # z=sorted(y)
-        #print(w,x,y,z)
+        #qwerty(w,x,y,z)
          #    for j in range(1,6,1):
          #        for k in range(1,6,1):
          #            canvas=tk.Canvas(width=500,height=200,bg='yellow')
@@ -1243,7 +1278,7 @@ def morning_only(request):
          #    can_list.append(canvas
     if final_list==[]:
         return render(request,'failed2.html')
-    #print(c)
+    #qwerty(c)
     global final_dict
     final_dict=[]
     global final_dict2
@@ -1257,22 +1292,40 @@ def morning_only(request):
                 final_dict[len(final_dict)-1].append(1)
                 final_dict2[len(final_dict2)-1].append(final_courses[final_list.index(i)][c])
                 c+=1
+                #qwerty(final_courses[final_list.index(i)][c])
             else:
                 final_dict[len(final_dict)-1].append(0)
                 final_dict2[len(final_dict2)-1].append('')
-    #print(len(final_dict))
+
+
+
+    global ins
+    ins=-1
     return redirect('/output_page_next/')
-    #print(final_dict,final_dict[0]['0'])
+    #qwerty(final_dict,final_dict[0]['0'])
 def output_page_next(request):
     global ins
     global final_dict
     global final_dict2
     global final_courses
-    #print(final_dict)
+    #qwerty(final_dict2)
+    #qwerty(final_dict)
+
+    if request.method=='POST':
+        form=gotoform(request.POST)
+        if form.is_valid():
+            ins=int(form.cleaned_data.get('num'))
+            ins-=2
+    else:
+        form=gotoform()
     ins+=1
     if ins==len(final_dict):
         ins=0
+    #qwerty(ins)
     return render(request,'output.html',{
+        'form':form,
+        'i':ins+1,
+        'n':len(final_dict),
         'k1':final_dict[ins][0],
         'k2':final_dict[ins][1],
         'k3':final_dict[ins][2],
@@ -1394,17 +1447,91 @@ def output_page_next(request):
         'l58':final_dict2[ins][57],
         'l59':final_dict2[ins][58],
         'l60':final_dict2[ins][59],
-    })
+        # 't1':teacher_list[ins][0],
+        # 't2':teacher_list[ins][1],
+        # 't3':teacher_list[ins][2],
+        # 't4':teacher_list[ins][3],
+        # 't5':teacher_list[ins][4],
+        # 't6':teacher_list[ins][5],
+        # 't7':teacher_list[ins][6],
+        # 't8':teacher_list[ins][7],
+        # 't9':teacher_list[ins][8],
+        # 't10':teacher_list[ins][9],
+        # 't11':teacher_list[ins][10],
+        # 't12':teacher_list[ins][11],
+        # 't13':teacher_list[ins][12],
+        # 't14':teacher_list[ins][13],
+        # 't15':teacher_list[ins][14],
+        # 't16':teacher_list[ins][15],
+        # 't17':teacher_list[ins][16],
+        # 't18':teacher_list[ins][17],
+        # 't19':teacher_list[ins][18],
+        # 't20':teacher_list[ins][19],
+        # 't21':teacher_list[ins][20],
+        # 't22':teacher_list[ins][21],
+        # 't23':teacher_list[ins][22],
+        # 't24':teacher_list[ins][23],
+        # 't25':teacher_list[ins][24],
+        # 't26':teacher_list[ins][25],
+        # 't27':teacher_list[ins][26],
+        # 't28':teacher_list[ins][27],
+        # 't29':teacher_list[ins][28],
+        # 't30':teacher_list[ins][29],
+        # 't31':teacher_list[ins][30],
+        # 't32':teacher_list[ins][31],
+        # 't33':teacher_list[ins][32],
+        # 't34':teacher_list[ins][33],
+        # 't35':teacher_list[ins][34],
+        # 't36':teacher_list[ins][35],
+        # 't37':teacher_list[ins][36],
+        # 't38':teacher_list[ins][37],
+        # 't39':teacher_list[ins][38],
+        # 't40':teacher_list[ins][39],
+        # 't41':teacher_list[ins][40],
+        # 't42':teacher_list[ins][41],
+        # 't43':teacher_list[ins][42],
+        # 't44':teacher_list[ins][43],
+        # 't45':teacher_list[ins][44],
+        # 't46':teacher_list[ins][45],
+        # 't47':teacher_list[ins][46],
+        # 't48':teacher_list[ins][47],
+        # 't49':teacher_list[ins][48],
+        # 't50':teacher_list[ins][49],
+        # 't51':teacher_list[ins][50],
+        # 't52':teacher_list[ins][51],
+        # 't53':teacher_list[ins][52],
+        # 't54':teacher_list[ins][53],
+        # 't55':teacher_list[ins][54],
+        # 't56':teacher_list[ins][55],
+        # 't57':teacher_list[ins][56],
+        # 't58':teacher_list[ins][57],
+        # 't59':teacher_list[ins][58],
+        # 't60':teacher_list[ins][59],
+        # 't':teacher_list[ins],
+    }
+    )
 def output_page_prev(request):
     global ins
     global final_dict
     global final_dict2
     global final_courses
-    #print(final_dict)
+    form=gotoform()
+    #qwerty(final_dict)
     ins-=1
     if ins==-1:
         ins=len(final_dict)-1
+
+    if request.method=='POST':
+        form=gotoform(request.POST)
+        if form.is_valid():
+            ins=int(form.cleaned_data.get('num'))
+            ins-=2
+    else:
+        form=gotoform()
     return render(request,'output.html',{
+        'form':form,
+        'i':ins+1,
+        'n':len(final_dict),
         'k1':final_dict[ins][0],
         'k2':final_dict[ins][1],
         'k3':final_dict[ins][2],
@@ -1525,5 +1652,65 @@ def output_page_prev(request):
         'l58':final_dict2[ins][57],
         'l59':final_dict2[ins][58],
         'l60':final_dict2[ins][59],
-
+        # 't1':teacher_list[ins][0],
+        # 't2':teacher_list[ins][1],
+        # 't3':teacher_list[ins][2],
+        # 't4':teacher_list[ins][3],
+        # 't5':teacher_list[ins][4],
+        # 't6':teacher_list[ins][5],
+        # 't7':teacher_list[ins][6],
+        # 't8':teacher_list[ins][7],
+        # 't9':teacher_list[ins][8],
+        # 't10':teacher_list[ins][9],
+        # 't11':teacher_list[ins][10],
+        # 't12':teacher_list[ins][11],
+        # 't13':teacher_list[ins][12],
+        # 't14':teacher_list[ins][13],
+        # 't15':teacher_list[ins][14],
+        # 't16':teacher_list[ins][15],
+        # 't17':teacher_list[ins][16],
+        # 't18':teacher_list[ins][17],
+        # 't19':teacher_list[ins][18],
+        # 't20':teacher_list[ins][19],
+        # 't21':teacher_list[ins][20],
+        # 't22':teacher_list[ins][21],
+        # 't23':teacher_list[ins][22],
+        # 't24':teacher_list[ins][23],
+        # 't25':teacher_list[ins][24],
+        # 't26':teacher_list[ins][25],
+        # 't27':teacher_list[ins][26],
+        # 't28':teacher_list[ins][27],
+        # 't29':teacher_list[ins][28],
+        # 't30':teacher_list[ins][29],
+        # 't31':teacher_list[ins][30],
+        # 't32':teacher_list[ins][31],
+        # 't33':teacher_list[ins][32],
+        # 't34':teacher_list[ins][33],
+        # 't35':teacher_list[ins][34],
+        # 't36':teacher_list[ins][35],
+        # 't37':teacher_list[ins][36],
+        # 't38':teacher_list[ins][37],
+        # 't39':teacher_list[ins][38],
+        # 't40':teacher_list[ins][39],
+        # 't41':teacher_list[ins][40],
+        # 't42':teacher_list[ins][41],
+        # 't43':teacher_list[ins][42],
+        # 't44':teacher_list[ins][43],
+        # 't45':teacher_list[ins][44],
+        # 't46':teacher_list[ins][45],
+        # 't47':teacher_list[ins][46],
+        # 't48':teacher_list[ins][47],
+        # 't49':teacher_list[ins][48],
+        # 't50':teacher_list[ins][49],
+        # 't51':teacher_list[ins][50],
+        # 't52':teacher_list[ins][51],
+        # 't53':teacher_list[ins][52],
+        # 't54':teacher_list[ins][53],
+        # 't55':teacher_list[ins][54],
+        # 't56':teacher_list[ins][55],
+        # 't57':teacher_list[ins][56],
+        # 't58':teacher_list[ins][57],
+        # 't59':teacher_list[ins][58],
+        # 't60':teacher_list[ins][59],
+        # 't':teacher_list[ins],
     })
